@@ -312,7 +312,11 @@ module Builder
         v = attrs[k]
         @target << %{ #{k}=#{@quote}#{_attr_value(v)}#{@quote}} if v
       end
-      attrs.each do |k, v|
+      # attrs.each do |k, v|
+      #   @target << %{ #{k}=#{@quote}#{_attr_value(v)}#{@quote}} unless order.member?(k) # " WART
+      # end
+      attrs.keys.sort.each do |k|
+        v = attrs[k]
         @target << %{ #{k}=#{@quote}#{_attr_value(v)}#{@quote}} unless order.member?(k) # " WART
       end
     end
